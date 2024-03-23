@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write
 
 # This is the workflow that is being run.
 jobs:
@@ -17,9 +19,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Install dependencies and run tests for the client application
-      - name: Install and Test Frontend
+      # Install dependencies for the client application
+      - name: Install dependencies
         working-directory: ./frontend
         run: |
           npm install
           npm run test
+       
+      # Install dependencies for the client application   
+      - name: Build dependencies
+        working-directory: ./frontend
+        run: npm run build
+
+      # deploy to GitHub Pages 
+      - name: Build dependencies
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build

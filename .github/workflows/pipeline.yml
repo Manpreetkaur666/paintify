@@ -35,12 +35,13 @@ jobs:
 
       # Install dependencies for the client application
       - name: Build Project
-        working-directory: ./frontend
         run: npm run build
+        working-directory: ./frontend
 
       # deploy to GitHub Pages
       - name: Deploy Project to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.4.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: ./frontend/build
+          folder: build
+          working-directory: ./frontend

@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": "https://Manpreetkaur666.github.io/paintify",
   "private": true,
   "scripts": {
     "dev": "next dev",

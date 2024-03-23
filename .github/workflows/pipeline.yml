@@ -27,20 +27,23 @@ jobs:
         with:
           node-version: 20
 
-      # Install dependencies for the client application
+      # Install dependencies for the Frontend
       - name: Install dependencies
         working-directory: ./frontend
         run: |
           npm install
 
-      # Install dependencies for the client application
+      # Build  Project for the Frontend
       - name: Build Project
-        run: npm run build
         working-directory: ./frontend
+        run: npm run build
+          npm run export
+          touch out/.nojekyll
 
       # deploy to GitHub Pages
       - name: Deploy Project to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: 'frontend/build'
+          working-directory: ./frontend
+          folder: out

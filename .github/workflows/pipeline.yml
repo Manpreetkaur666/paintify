@@ -40,7 +40,7 @@ jobs:
 
       # deploy to GitHub Pages
       - name: Deploy Project to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@$4.4.0
+        uses: JamesIves/github-pages-deploy-action@4.4.0
         with:
           branch: gh-pages
           folder: ./frontend/build

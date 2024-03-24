@@ -5,14 +5,14 @@ export const navData = [
     },
     {
         name: 'Profile',
-        link: 'profile'
+        link: '/profile'
     },
     {
         name: 'Dashboard',
-        link: 'dashboard'
+        link: '/dashboard'
     },
     {
         name: 'Logout',
-        link: 'logout'
+        link: '/logout'
     },
 ]

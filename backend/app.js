@@ -1,11 +1,25 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const connectToMongo = require('./db');
+
+const app = express();
+
+// Port Configuration from .env file
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 5000;
+}
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
-})
+});
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+app.use(express.json());
+
+app.use('/api/color', require('./routes/colorRoute'));
+
+// create connection with mongodB
+connectToMongo().then(() => {
+    app.listen(port, () => {
+        console.log("listening for requests");
+    })
+});

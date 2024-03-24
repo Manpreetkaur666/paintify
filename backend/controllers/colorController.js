@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Color = require('../model/Color');
 
 
-/******************** Route 1: Register New User ************************/
+/******************** Route 1: Create New Color ************************/
 const createColor = asyncHandler(async (req, res) => {
 
     const { name, stock, status } = req.body;

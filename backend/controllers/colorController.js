@@ -5,10 +5,10 @@ const Color = require('../model/Color');
 /******************** Route 1: Create New Color ************************/
 const createColor = asyncHandler(async (req, res) => {
 
-    const { name, stock, status } = req.body;
+    const { name, stock } = req.body;
 
     // Check - to enter all fields
-    if (!name || !stock || !status) {
+    if (!name || !stock ) {
         res.status(400);
         throw new Error("Please Enter all fields");
     }
@@ -27,7 +27,6 @@ const createColor = asyncHandler(async (req, res) => {
         const color = await Color.create({
             name,
             stock,
-            status,
         });
 
         // display - created color
@@ -35,7 +34,6 @@ const createColor = asyncHandler(async (req, res) => {
             res.status(201).json({
                 name: color.name,
                 stock: color.stock,
-                status: color.status,
             });
         } else {
             res.status(400);

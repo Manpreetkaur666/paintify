@@ -2,6 +2,7 @@ const express = require('express');
 const connectToMongo = require('./db');
 
 const app = express();
+var cors = require('cors')
 
 // Port Configuration from .env file
 let port = process.env.PORT;
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/color', require('./routes/colorRoute'));

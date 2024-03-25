@@ -104,7 +104,7 @@ const getUsers = asyncHandler(async (req, res) => {
 
 /******************** Route 4: Update User ************************/
 const updateUser = asyncHandler(async (req, res) => {
-    const { name, email, role, chatId } = req.body;
+    const { chatId, name, email, role } = req.body;
 
     try {
         //Create a newUser

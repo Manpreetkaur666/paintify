@@ -1,3 +1,7 @@
 {
-  "/dashboard/users/page": "app/dashboard/users/page.js"
+  "/dashboard/users/page": "app/dashboard/users/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/home/page": "app/home/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/colors/page": "app/dashboard/colors/page.js"
 }

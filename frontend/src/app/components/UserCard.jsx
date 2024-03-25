@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "./Modal";
+import UserContext from "../context/users/UserContext";
 
 const UserCard = ({ user }) => {
+    // const context = useContext(UserContext);
   const [toggle, setToggle] = useState(false);
 
   function toggleDisplay() {
@@ -16,13 +18,17 @@ const UserCard = ({ user }) => {
           <div className="flex-shrink-0">
             {/* User Image */}
             <div className="w-8 h-8 rounded-full bg-black">
-              <Image width={40} height={40} loader={() => user.photo} />
+              {/* <Image width={40} height={40} loader={() => user.photo} /> */}
             </div>
           </div>
           <div className="min-w-0">
             {/* User Name */}
             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
               {user.name}
+            </p>
+            {/* User Email */}
+            <p className="text-sm font-medium text-gray-500 truncate dark:text-white">
+              {user.email}
             </p>
             {/* User Role */}
             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
@@ -36,12 +42,9 @@ const UserCard = ({ user }) => {
         </div>
       </li>
 
-      <Modal toggle = {toggle} toggleDisplay={toggleDisplay} />
-
-
+      <Modal toggle={toggle} toggleDisplay={toggleDisplay} user={user} />
     </>
   );
 };
 
 export default UserCard;
-

@@ -22,14 +22,14 @@ const UserState = (props) => {
   }
 
   // ROUTE2: Update user using PUT request 
-  const updateUser = async (chatId, name, email, role) => {
+  const updateUser = async (userId, name, email, role) => {
     const url = `${host}api/auth/update`;
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ chatId, name, email, role })
+      body: JSON.stringify({ userId, name, email, role })
     });
     const json = await response.json();
 
@@ -47,7 +47,7 @@ const UserState = (props) => {
     setUsers(newUsers);
   }
 
-  // ROUTE3: Update user using PUT request 
+  // ROUTE3: Register user using POST request 
   const registerUser = async (name, email, role, password) => {
     const url = `${host}api/auth/register`;
     const response = await fetch(url, {

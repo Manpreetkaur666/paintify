@@ -57,5 +57,32 @@ const getColors = asyncHandler(async (req, res) => {
     }
 });
 
+/******************** Route 2: Update Color ************************/
+const updateColor = asyncHandler(async (req, res) => {
+    const { colorId, name, stock } = req.body;
 
-module.exports = { createColor, getColors };
+    try {
+        //Create a newUser
+        const newColor = {}
+        if (name) { newColor.name = name }
+        if (stock) { newColor.stock = stock }
+
+        let color = await Color.findById(colorId);
+
+        // throw error - if user exists
+        if (!color) {
+            res.status(400);
+            throw new Error("Color does not exists!");
+        }
+
+        //Find the user and then update it!
+        color = await Color.findByIdAndUpdate(colorId, { $set: newColor }, { new: true })
+        res.json({ color });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Something went wrong! Please try Again!")
+    }
+})
+
+
+module.exports = { createColor, getColors, updateColor };

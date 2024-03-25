@@ -24,14 +24,14 @@
   filter: blur(8px);
 }
 
-.title {
+/* .title {
   position: absolute;
   top: 10%;
   right: 10%;
   font-size: 12rem;
   color: black;
   text-shadow: 2px 2px white;
-}
+} */
 
 /* body {
   color: rgb(var(--foreground-rgb));

@@ -21,8 +21,33 @@ const ColorState = (props) => {
         setColors(json);
     }
 
+    // ROUTE2: Update Color using PUT request 
+    const updateColor = async (colorId, name, stock) => {
+        const url = `${host}api/color/update`;
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ colorId, name, stock })
+        });
+        const json = await response.json();
+
+        let newColors = JSON.parse(JSON.stringify(colors));
+
+        for (let index = 0; index < newColors.length; index++) {
+            const element = newColors[index];
+            if (element._id === colorId) {
+                newColors[index].name = name;
+                newColors[index].stock = stock;
+                break;
+            }
+        }
+        setColors(newColors);
+    }
+
     return (
-        <ColorContext.Provider value={{ colors, getAllColors }}>
+        <ColorContext.Provider value={{ colors, getAllColors, updateColor }}>
             {props.children}
         </ColorContext.Provider>)
 

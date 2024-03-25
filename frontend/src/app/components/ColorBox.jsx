@@ -1,11 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import ColorModal from "./ColorModal";
 
 const ColorBox = ({ color }) => {
   const [status, setStatus] = useState({
     statusText: "",
     statusColor: "",
   });
+
+  const [toggle, setToggle] = useState(false);
+
+  function toggleDisplay() {
+    setToggle(!toggle);
+  }
 
   // check status - update status based on stock and update staus text and color
   function checkStatus() {
@@ -49,6 +56,19 @@ const ColorBox = ({ color }) => {
           </p>
         </div>
       </div>
+
+      {/* Edit button */}
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="w-fit h-fit px-7 py-2.5 my-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          onClick={() => toggleDisplay()}
+        >
+          Edit
+        </button>
+      </div>
+
+      <ColorModal toggle={toggle} toggleDisplay={toggleDisplay} color={color} />
     </div>
   );
 };

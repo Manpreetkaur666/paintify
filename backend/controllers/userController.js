@@ -104,7 +104,7 @@ const getUsers = asyncHandler(async (req, res) => {
 
 /******************** Route 4: Update User ************************/
 const updateUser = asyncHandler(async (req, res) => {
-    const { chatId, name, email, role } = req.body;
+    const { userId, name, email, role } = req.body;
 
     try {
         //Create a newUser
@@ -113,7 +113,7 @@ const updateUser = asyncHandler(async (req, res) => {
         if (email) { newUser.email = email }
         if (role) { newUser.role = role } 
 
-        let user = await User.findById(chatId);
+        let user = await User.findById(userId);
 
          // throw error - if user exists
          if (!user) {
@@ -122,7 +122,7 @@ const updateUser = asyncHandler(async (req, res) => {
          }
 
          //Find the user and then update it!
-         user = await User.findByIdAndUpdate(chatId, { $set: newUser }, { new: true })
+         user = await User.findByIdAndUpdate(userId, { $set: newUser }, { new: true })
          res.json({ user });
      } catch (error) {
         console.error(error.message);

@@ -1,10 +1,13 @@
 'use client'
 import React, { useState } from 'react';
 import UserContext from './UserContext';
+import { useRouter } from 'next/navigation'
 
 const UserState = (props) => {
   const host = "http://localhost:5000/";
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState("");
+  const router = useRouter();
 
   // ROUTE1: Get All Users using GET request
   const getAllUsers = async () => {
@@ -61,8 +64,30 @@ const UserState = (props) => {
     setUsers(users.concat(user));
   }
 
+  // ROUTE4: Login user using POST request 
+  const loginUser = async (email, password) => {
+    const url = `${host}api/auth/login`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password })
+    });
+    const json = await response.json();
+    console.log("json");
+    setUser(json);
+
+    if (json) {
+      localStorage.setItem('token', json.token)
+      router.push('/home');
+    }
+  }
+
+
+
   return (
-    <UserContext.Provider value={{ users, getAllUsers, updateUser, registerUser }}>
+    <UserContext.Provider value={{ users, getAllUsers, updateUser, registerUser, user, loginUser }}>
       {props.children}
     </UserContext.Provider>)
 }

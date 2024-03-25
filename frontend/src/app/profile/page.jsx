@@ -1,14 +1,17 @@
 "use client";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import profileImg from "../../../public/images/profilePage/profile.png";
 import Image from "next/image";
+import UserContext from "../context/users/UserContext";
 
 const page = () => {
+  const context = useContext(UserContext);
+  const { user } = context;
+
   return (
     <div className="h-screen flex flex-col items-center">
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        
-         <div className="flex flex-col items-center pb-10">
+        <div className="flex flex-col items-center pb-10">
           {/* Profila Photo */}
           <Image
             src={profileImg}
@@ -18,11 +21,13 @@ const page = () => {
 
           {/* User Name */}
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            User name
+            {user.name}
           </h5>
 
           {/* User Position */}
-          <span className="text-sm text-gray-500 dark:text-gray-400">Position</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            {user.role}
+          </span>
 
           {/* Edit Options */}
           <div className="flex mt-4 md:mt-6">

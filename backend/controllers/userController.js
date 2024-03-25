@@ -90,7 +90,7 @@ const authUser = asyncHandler(async (req, res) => {
     }
 });
 
-/******************** Route 2: Get All Users ************************/
+/******************** Route 3: Get All Users ************************/
 const getUsers = asyncHandler(async (req, res) => {
     try {
         const users = await User.find();
@@ -101,4 +101,33 @@ const getUsers = asyncHandler(async (req, res) => {
         res.status(500).send("Something went wrong! Please try Again!")
     }
 });
-module.exports = { registerUser, authUser, getUsers };
+
+/******************** Route 4: Update User ************************/
+const updateUser = asyncHandler(async (req, res) => {
+    const { name, email, role, chatId } = req.body;
+
+    try {
+        //Create a newUser
+        const newUser = {}
+        if (name) { newUser.name = name }
+        if (email) { newUser.email = email }
+        if (role) { newUser.role = role } 
+
+        let user = await User.findById(chatId);
+
+         // throw error - if user exists
+         if (!user) {
+             res.status(400);
+             throw new Error("User does not exists!");
+         }
+
+         //Find the user and then update it!
+         user = await User.findByIdAndUpdate(chatId, { $set: newUser }, { new: true })
+         res.json({ user });
+     } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Something went wrong! Please try Again!")
+     }
+})
+
+module.exports = { registerUser, authUser, getUsers, updateUser };

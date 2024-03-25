@@ -7,7 +7,7 @@ const ColorState = (props) => {
     const host = "http://localhost:5000/";
     const [colors, setColors] = useState([]);
 
-    // ROUTE1: FetchAll Colors using GET request
+    // ROUTE1: Get All Colors using GET request
     const getAllColors = async () => {
         const url = `${host}api/color/`
         const response = await fetch(url, {
@@ -19,7 +19,6 @@ const ColorState = (props) => {
         const json = await response.json()
         console.log(json);
         setColors(json);
-        console.log(colors);
     }
 
     return (

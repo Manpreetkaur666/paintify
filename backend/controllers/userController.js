@@ -4,10 +4,10 @@ const generateToken = require('../config/generateToken');
 
 /******************** Route 1: Register New User ************************/
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, photo } = req.body;
+    const { name, email, password, role, photo } = req.body;
 
     // Check - to enter all fields
-    if (!name || !email || !password) {
+    if (!name || !email || !role || !password) {
         res.status(400);
         throw new Error("Please Enter all fields");
     }
@@ -27,6 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
             name,
             email,
             password,
+            role,
             photo,
         });
 
@@ -36,6 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
+                role: user.role,
                 password: user.password,
                 photo: user.photo,
             });
@@ -88,4 +90,15 @@ const authUser = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { registerUser, authUser };
+/******************** Route 2: Get All Users ************************/
+const getUsers = asyncHandler(async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Something went wrong! Please try Again!")
+    }
+});
+module.exports = { registerUser, authUser, getUsers };
